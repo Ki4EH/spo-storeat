@@ -52,3 +52,13 @@
     color:#5D0000;
     font-size: 18px;
 }
+.container{
+    width: 95%;
+    justify-content: center;
+    padding-left: 20px;
+    text-align: justify;
+}
+.desc p{
+    padding: 20px;
+    
+}

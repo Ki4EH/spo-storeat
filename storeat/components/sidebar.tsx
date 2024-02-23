@@ -38,7 +38,7 @@ const Sidebar = () =>{
                         alt=""
                     />
                 </div>
-                <p className={styles.list_tittle}><Link style={{ textDecoration: 'none', fontSize: '15px', color: '#FFE3CE' }} href="#">Рецепты</Link></p>
+                <p className={styles.list_tittle}><Link style={{ textDecoration: 'none', fontSize: '15px', color: '#FFE3CE' }} href="/my_recipes">Рецепты</Link></p>
                       
                 
             </div>

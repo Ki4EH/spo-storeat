@@ -1,0 +1,85 @@
+.back{
+    background-color: #5D0000;
+    backdrop-filter: blur(100px);
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    padding-top: 2%;
+}
+.register{
+    background-color: #ED9A62;
+    width: 854px;
+    height: 900px;
+    display: block;
+    overflow: hidden;
+    margin: auto;
+   
+}
+.img_leaves{
+    width: 218px;
+    position: relative;
+    margin-left: -11px;
+}
+
+.title{
+    font-style: normal;
+    font-size: 70px;
+    color: #482B09;
+    text-align: center;
+    padding: 0;
+    padding-bottom: 78px;
+}
+
+.form_login{
+    display: grid;
+    grid-template-columns: auto 317px auto;
+    grid-auto-rows: max-content;
+    margin: auto;
+    grid-row-gap: 37px;
+}
+
+.login_email{
+    width: 317px;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    font-size: 20px;
+    background-color: #ED9A62;
+    border:none;
+    border-bottom: 3px solid rgba(93, 0, 0, 0.45);
+}
+.login_email::placeholder{
+    color: #323232;
+}
+.login_password::placeholder{
+    color: #323232;
+}
+.login_password{
+    width: 317px;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    color: #323232;
+    font-size: 20px;
+    background-color: #ED9A62;
+    border:none;
+    border-bottom: 3px solid rgba(93, 0, 0, 0.45);
+}
+
+.login_btn{
+    grid-column: 2/3;
+    grid-row: 3/4;
+    width: 213px;
+    height: 43.95px;
+    margin: auto;
+    background-color: #5D0000;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 30px;
+    border: 0px;
+    color: #FFF7E2;
+    box-shadow: 0px 7px 4px rgba(56, 67, 33, 0.39);
+}
+
+.img{
+    position: relative;
+    margin-top: 40px;
+}

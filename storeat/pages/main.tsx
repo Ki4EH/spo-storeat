@@ -1,10 +1,10 @@
+'use client'
 import styles from '../styles/style.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import TitleDescription from '../components/title_description';
 import Title from '../components/title';
-
-
+import Slider from '../components/slider';
 
 const Main = () => {
   return (
@@ -25,7 +25,7 @@ const Main = () => {
             <h2 className={styles.title_description} ><TitleDescription /></h2>
             <p className={styles.description}>Простой путь к более осознанному управлению продуктами в холодильнике!</p>
             <div className={styles.btn__link}><Link style={{ textDecoration: 'none', fontSize: '25px', color: '#FFF7E2' }} href="/menu"><button className={styles.btn}>Зарегистрироваться</button></Link></div>
-            <div className={styles.btn_description}>Уже есть аккаунт?<Link style={{ textDecoration: 'none', fontSize: '20px', fontWeight: 'bold', color: '#3E3F3C' }} href="#">Войти</Link></div>
+            <div className={styles.btn_description}>Уже есть аккаунт?<Link style={{ textDecoration: 'none', fontSize: '20px', fontWeight: 'bold', color: '#3E3F3C' }} href="/login">Войти</Link></div>
             <div className={styles.wrapper_image}>
               <Image
                 src="/main-page_image.svg"
@@ -36,8 +36,12 @@ const Main = () => {
             </div>
 
           </div>
-
+          
         </div>
+        <div style={{marginTop: '-5px'}}>
+        <Slider />
+        </div>
+        
         </div>
     </>
   );

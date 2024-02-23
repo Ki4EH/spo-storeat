@@ -1,0 +1,25 @@
+import ImageSlider from './ImageSlider';
+
+
+const Slider=()=>{
+    const slides=[
+        {url: 'http://localhost:3000/image-1.jpg', title: '1'},
+        {url: 'http://localhost:3000/image-2.jpg', title: '2'},
+        {url: 'http://localhost:3000/image-3.jpg', title: '3'},
+        {url: 'http://localhost:3000/image-4.jpg', title: '4'},
+        {url: 'http://localhost:3000/image-5.jpg', title: '5'}
+    ];
+
+    const containerStyles={
+        width: '100%',
+        height: '350px',
+        margin: '0 auto'
+    }
+    return(
+        <div style={containerStyles}>
+            <ImageSlider slides={slides}/>
+        </div>
+    )
+}
+
+export default Slider;

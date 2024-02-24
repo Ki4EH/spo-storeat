@@ -21,8 +21,8 @@ const client = new MongoClient(uri,  {
 );
 
 client.connect().then((res, err) => {
-    if (err) return console.log(err)
-    require('./app/routes')(app, client.db('products'));
+    if (err) return console.log(err);
+    require('./app/routes')(app, client.db('main'));
     app.listen(port, () => {
         console.log('We are live on ' + port);
     });        

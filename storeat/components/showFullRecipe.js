@@ -17,7 +17,7 @@ export class ShowFullRecipe extends Component {
             />
             </div>
             </div>
-           
+              
             <div className={style.wrapper}>
             <div className={style.img}><img src={"/"+ this.props.recipe.img} /></div>
             <div className={style.ingredients}>

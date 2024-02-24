@@ -18,7 +18,7 @@ const Sidebar = () =>{
                         alt=""
                     />
                 </div>
-                <p className={styles.list_tittle}><Link style={{ textDecoration: 'none', fontSize: '15px', color: '#FFE3CE' }} href="#">Мои продукты</Link></p>
+                <p className={styles.list_tittle}><Link style={{ textDecoration: 'none', fontSize: '15px', color: '#FFE3CE' }} href="/my_products">Мои продукты</Link></p>
                    
                 <div className={styles.list_image}>
                     <Image

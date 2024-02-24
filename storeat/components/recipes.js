@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Image from 'next/image';
 import Recipe from './recipe';
 import style from '../styles/myRecipes.module.css';
+
 export class Recipes extends Component {
   render() {
     return (

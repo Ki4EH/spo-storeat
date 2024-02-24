@@ -8,26 +8,26 @@
 }
 .register{
     background-color: #ED9A62;
-    width: 854px;
-    height: 900px;
+    width: 380px;
+    height: 600px;
     display: block;
     overflow: hidden;
     margin: auto;
-   
 }
+
 .img_leaves{
-    width: 218px;
+    width: 80px;
     position: relative;
     margin-left: -11px;
 }
 
 .title{
     font-style: normal;
-    font-size: 70px;
+    font-size: 50px;
     color: #482B09;
     text-align: center;
     padding: 0;
-    padding-bottom: 78px;
+    padding-bottom: 50px;
 }
 
 .form_login{
@@ -42,7 +42,7 @@
     width: 317px;
     grid-column: 2/3;
     grid-row: 1/2;
-    font-size: 20px;
+    font-size: 15px;
     background-color: #ED9A62;
     border:none;
     border-bottom: 3px solid rgba(93, 0, 0, 0.45);
@@ -58,7 +58,7 @@
     grid-column: 2/3;
     grid-row: 2/3;
     color: #323232;
-    font-size: 20px;
+    font-size: 15px;
     background-color: #ED9A62;
     border:none;
     border-bottom: 3px solid rgba(93, 0, 0, 0.45);
@@ -67,12 +67,12 @@
 .login_btn{
     grid-column: 2/3;
     grid-row: 3/4;
-    width: 213px;
+    width: 195px;
     height: 43.95px;
     margin: auto;
     background-color: #5D0000;
     text-align: center;
-    font-size: 25px;
+    font-size: 18px;
     border-radius: 30px;
     border: 0px;
     color: #FFF7E2;
@@ -81,5 +81,5 @@
 
 .img{
     position: relative;
-    margin-top: 40px;
+    margin-top: 85px;
 }

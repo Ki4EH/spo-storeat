@@ -8,31 +8,6 @@ import Categories from '../components/categories';
 
 export const montserrat = Montserrat({subsets: ['latin']})
 
-const YourComponent=()=>{
-    const [data, setData] = useState([]);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('api/json/data');
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const jsonData = await response.json();
-          setData(jsonData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-    }, []);
-
-return(
-    data
-)
-}
-
 export class MyProducts extends Component {      
     constructor(props){
         super(props)

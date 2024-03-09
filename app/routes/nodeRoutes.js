@@ -7,16 +7,22 @@ function formatDate(date){
 
 module.exports = function(app, db) {
     app.post('/user/newproduct', (req, res) => { // добавление продукта пользователя
-        const entry = req.body.product;
-        const userId = req.body.id;
+        let entry;
+        let userId;
+        try {
+            entry = req.body.product;
+            userId = req.body.id;
+        } catch {
+            res.send({"Error": "Incorrect request."});
+        }
         db.collection('users').findOne({id: userId}).then((result, err) => {
             const productId = result.products[result.products.length - 1].id + 1;
             entry.id = productId;
             db.collection('users').updateOne({id: userId}, {$push: {products: entry}}).then((result, err) => {
-                if (err){
+                if (err) {
                     res.send({"error": "An error has occured."});
                     console.log(err)
-                } 
+                }
                 else res.send("Done."); 
             }
             )
@@ -44,7 +50,7 @@ module.exports = function(app, db) {
         )
     });
 
-    app.post('/user/openproduct', (req, res) => { // добавление рецепта пользователя
+    app.post('/user/openproduct', (req, res) => { // задание даты открытия
         let userId = 0;
         let productId = 0;
         try {
@@ -90,25 +96,40 @@ module.exports = function(app, db) {
     });
 
     app.get("/user/recipes", (req, res) => { // получение рецепта пользователя
-        const userId = parseInt(req.query.id);
+        let userId = 0;
+        try {
+            userId = parseInt(req.query.id);
+        } catch {
+            res.send({"Error": "Incorrect request."})
+        }
         db.collection("users").findOne({id: userId}, {}).then((item, err) => {
             // console.log(userId);
             if (err) {
                 console.log(err);
                 res.send({"error": "server error has occured"});
             } 
+            else if (!item) {
+                res.send({"Error": "Could not find user with ID " + userId + "."})
+            }
             else res.send(item.recipes);
         });
     });
 
     app.get("/user/expiredproducts", (req, res) => { // получение просроченных продуктов пользователя
-        const userId = parseInt(req.query.id);
+        let userId;
+        try {
+            userId = parseInt(req.query.id);
+        } catch {
+            res.send({"Error": "Incorrect request."})
+        }
         console.log('1');
         db.collection("users").findOne({id: userId}, {}).then((item, err) => {
             // console.log(userId);
             if (err) {
-                console.log(err);
+                // console.log(err);
                 res.send({"error": "server error has occured"});
+            } else if (!item) {
+                res.send({"Error": "Could not find user with ID " + userId + "."})
             }
             
             let expiredproducts = [];

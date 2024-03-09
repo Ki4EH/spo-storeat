@@ -103,7 +103,7 @@ module.exports = function(app, db) {
 
                     }
                 } else {
-                    let newDate = new Date(element.expiresBy.replace('/', '-'));
+                    let newDate = new Date(element.expiresBy);
                     // console.log(newDate);
                     if (newDate.getDate() < new Date().getDate()) expiredproducts.push({
                         id: index++,

@@ -36,6 +36,21 @@ module.exports = function(app, db) {
         )
     });
 
+    app.post('/user/openproduct', (req, res) => { // добавление рецепта пользователя
+        const productId = req.body.productId;
+        const userId = req.body.id;
+        let date = new Date();
+        date = `${formatDate(date.getFullYear())}-${formatDate(date.getUTCMonth() + 1)}-${formatDate(date.getDate())}`;
+        db.collection('users').updateOne({id: userId, "products.id": productId}, {$set: {"products.$.openingDate" : date}}).then((result, err) => {
+            if (err){
+                res.send({"error": "An error has occured."});
+                console.log(err)
+            } 
+            else res.send("Done."); 
+        }
+        )
+    });
+
     app.get("/user/products", (req, res) => { // получение продукта пользователя
         const userId = parseInt(req.query.id);
         db.collection("users").findOne({id: userId}, {}).then((item, err) => {
@@ -72,7 +87,8 @@ module.exports = function(app, db) {
             let index = 1;
             item.products.forEach(element => {
                 if (element.openingDate){
-                    let newDate = new Date(element.openingDate.replace('/', '-'));
+                    let newDate = new Date(element.openingDate);
+                    console.log(element.openingDate, element.name, newDate);
                     if (newDate.getTime() + (element.shelfLife * 24 * 3600 * 1000) < new Date().getTime()) { 
                         expiredproducts.push({
                             id: index++,

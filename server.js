@@ -2,11 +2,13 @@ const express = require('express');
 // const MongoClient = require('mongodb').MongoClient;
 const uri = require('./config/db').url;
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 
 const port = 8000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 
 const { MongoClient, ServerApiVersion } = require("mongodb");

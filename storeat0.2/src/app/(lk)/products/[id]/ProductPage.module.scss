@@ -1,0 +1,57 @@
+.fullProduct{
+    margin-top: 22px;
+    >h2{
+        font-size: 25px;
+        text-align: center;
+        color: #5D0000;
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+    >.wrapper{
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        margin-left:20px;
+        grid-column-gap: 10px;
+        justify-content: center;
+        >img{
+            border-radius: 10px;
+            border: 1px solid #5D0000;
+            width: 340px;
+            height: auto;
+        }
+    }
+    >h3{
+        color: #5D0000;
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+    >p{
+        color: #5D0000;
+        font-size: 16px;
+        text-align: justify;
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+}
+
+.info{
+    color:#5D0000;
+    >h4{
+        color: #5D0000;
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+}
+
+.nutrition{
+    color: #5D0000;
+    >.mini_title{
+        color: #5D0000;
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+}

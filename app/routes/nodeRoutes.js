@@ -41,9 +41,11 @@ module.exports = function(app, db) {
         }
         // console.log(req.body);
         db.collection('users').updateOne({id: userId}, {$push: {recipes: entry}}).then((result, err) => {
+            const recipeId = result.recipes[result.recipes.length - 1].id + 1;
+            entry.id = recipeId;
             if (err){
                 res.send({"error": "An error has occured."});
-                console.log(err)
+                console.log(err);
             } 
             else res.send("Done."); 
         }
@@ -95,6 +97,31 @@ module.exports = function(app, db) {
         });
     });
 
+    app.get("/user/productsingle", (req, res) => { // получение продукта пользователя
+        let userId = 0;
+        let productId;
+        try {
+            userId = parseInt(req.query.id);
+            productId = parseInt(req.query.productId);
+        } catch {
+            res.send({"Error": "Incorrect request."})
+        }
+        db.collection("users").findOne({id: userId}, {}).then((item, err) => {
+            // console.log(userId);
+            if (err) {
+                console.log(err);
+                res.send({"Error": "Server error has occured."});
+            } 
+            else if (!item) {
+                res.send({"Error": "Could not find user with ID " + userId + "."})
+            }
+            item.products.forEach(element => {
+                if (element.id == productId) {res.send(element); return;};
+            })
+            res.send({"Error": "Could not find product with ID " + productId + "."})
+        });
+    });
+
     app.get("/user/recipes", (req, res) => { // получение рецепта пользователя
         let userId = 0;
         try {
@@ -115,6 +142,31 @@ module.exports = function(app, db) {
         });
     });
 
+    app.get("/user/recipesingle", (req, res) => { // получение рецепта пользователя
+        let userId = 0;
+        let recipeId;
+        try {
+            userId = parseInt(req.query.id);
+            recipeId = parseInt(req.query.recipeId);
+        } catch {
+            res.send({"Error": "Incorrect request."})
+        }
+        db.collection("users").findOne({id: userId}, {}).then((item, err) => {
+            // console.log(userId);
+            if (err) {
+                console.log(err);
+                res.send({"error": "server error has occured"});
+            } 
+            else if (!item) {
+                res.send({"Error": "Could not find user with ID " + userId + "."})
+            }
+            item.recipes.forEach(element => {
+                if (element.id == recipeId) {res.send(element); return;};
+            })
+            res.send({"Error": "Could not find recipe with ID " + recipeId + "."})
+        });
+    });
+
     app.get("/user/expiredproducts", (req, res) => { // получение просроченных продуктов пользователя
         let userId;
         try {
@@ -122,7 +174,6 @@ module.exports = function(app, db) {
         } catch {
             res.send({"Error": "Incorrect request."})
         }
-        console.log('1');
         db.collection("users").findOne({id: userId}, {}).then((item, err) => {
             // console.log(userId);
             if (err) {
@@ -162,6 +213,50 @@ module.exports = function(app, db) {
                 }
             });
             res.send(expiredproducts); 
+        });
+    });
+
+    app.delete("/user/deleterecipe", (req, res) => {
+        let userId;
+        let recipeId;
+        try {
+            userId = parseInt(req.query.id);
+            recipeId = parseInt(req.query.recipeId);
+        } catch {
+            res.send({"Error": "Incorrect request."});
+        }
+        db.collection("users").updateOne({id: userId}, {$pull: {recipes: {id: recipeId}}}).then((item, err) => {
+            // console.log(userId);
+            if (err) {
+                console.log(err);
+                res.send({"Error": "Server error has occured."});
+            } 
+            else if (!item) {
+                res.send({"Error": "Could not find product with ID " + recipeId + " from user with ID " + userId + "."});
+            }
+            else res.send("Done.");
+        });
+    });
+
+    app.delete("/user/deleteproduct", (req, res) => {
+        let userId;
+        let productId;
+        try {
+            userId = parseInt(req.query.id);
+            productId = parseInt(req.query.productId);
+        } catch {
+            res.send({"Error": "Incorrect request."});
+        }
+        db.collection("users").updateOne({id: userId}, {$pull: {products: {id: productId}}}).then((item, err) => {
+            // console.log(userId);
+            if (err) {
+                console.log(err);
+                res.send({"Error": "Server error has occured."});
+            } 
+            else if (!item) {
+                res.send({"Error": "Could not find product with ID " + productId + " from user with ID " + userId + "."});
+            }
+            else res.send("Done.");
         });
     });
 };

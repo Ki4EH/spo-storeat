@@ -103,7 +103,6 @@ module.exports = function(app, db) {
 
     app.get("/user/expiredproducts", (req, res) => { // получение просроченных продуктов пользователя
         const userId = parseInt(req.query.id);
-        console.log('1');
         db.collection("users").findOne({id: userId}, {}).then((item, err) => {
             // console.log(userId);
             if (err) {

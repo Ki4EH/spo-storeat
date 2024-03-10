@@ -1,0 +1,25 @@
+.recipe{
+    width: 200px;
+    height: 200px;
+    background-color: #9E5B52;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.39);
+    cursor: pointer;
+    transition: transform 300ms ease;
+
+    &:hover{
+        transform: scale(1.05);
+    }
+
+    >img{
+        width: 200px;
+        height: 147px;
+    }
+
+    >h2{
+        color: #FFE3CE;
+        font-size: 15px;
+        text-align: center;
+        margin-top: 14px;
+        font-weight: normal;
+    }
+}

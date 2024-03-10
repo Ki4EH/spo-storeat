@@ -1,0 +1,15 @@
+.main{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-rows: repeat(auto-fill, 200px);
+    width: 100%;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    margin-left: 10px;
+    >.addRecipe{
+        text-align: center;
+        padding-top: 40%;
+        padding-left: 40%;
+        cursor: pointer;
+    }
+}

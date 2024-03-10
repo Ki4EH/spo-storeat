@@ -1,0 +1,129 @@
+.window{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.605);
+}
+
+.container{
+    width: 444px;
+    min-height: 614px;
+    background-color: #5D0000;
+    border-radius: 5px;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+    z-index: 100;
+    color: #FFF4EE;
+    >form{
+        width:380px;
+        min-height: 486px;
+        margin-left:32px;
+        padding-top: 20px;
+        >.main_info{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: 30px 76px;
+            grid-row-gap: 10px;
+            font-size: 15px;
+            color: #4B4B4B;
+            margin-top: 20px;
+            >input{
+                grid-column: 2/3;
+                width:229px;
+                height: 30px;
+                margin-top:7px;
+                background-color: #FFF4EE;
+                border-radius: 5px;
+                padding: 7px;
+            }
+        }
+
+        >h2{
+            margin-top: 9px;
+            margin-left: 10px;
+            margin-bottom: 9px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        >.nutrition{
+            display: grid;
+            grid-template-columns: 158px 46px;
+
+            >p{
+                font-size: 15px;
+                text-align: left;
+            }
+
+            >input{
+                background-color: #FFF4EE;
+                width: 46px;
+                height: 16px;
+                border-radius: 5px;
+                color: #4B4B4B;
+                font-size: 12px;
+                padding: 2px;
+                margin-top:3px;
+            }
+        }
+
+        >button{
+            margin-top: 18px;
+            margin-bottom: 9px;
+            text-align: center;
+            width: 100%;
+            height: 35px;
+            background-color: #360101b4;
+            border-radius: 5px;
+            &:hover{
+                background-color: #fcdac8;
+                color:#5D0000;
+            }
+        }
+
+        >.ingredients{
+            display: grid;
+            grid-template-columns: 326px 46px;
+            grid-column-gap: 8px;
+            >input{
+                padding: 2px;
+                font-size: 12px;
+                color:#4B4B4B;
+                background-color: #FFF4EE;
+                border-radius: 5px;
+                margin-top:3px;
+            }
+            
+        }
+
+        >.steps{
+            display: grid;
+            grid-template-columns: 26px 346px;
+            grid-column-gap: 8px;
+            >input{
+                height: 30px;
+                font-size: 12px;
+                color:#4B4B4B;
+                background-color: #FFF4EE;
+                border-radius: 5px;
+                margin-top:12px;
+                text-align: center;
+            }
+            >textarea{
+                width: 100%;
+                max-height: 100px;
+                background-color: #FFF4EE;
+                border-radius: 5px;
+                padding: 7px;
+                margin-top:3px;
+                font-size: 12px;
+                color:#4B4B4B;
+            }
+        }
+    }
+}

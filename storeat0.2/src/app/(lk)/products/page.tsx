@@ -3,15 +3,14 @@ import Products from "@/components/Products"
 import style from './ProductPage.module.scss'
 import ShopList from "@/components/ShopList"
 import ProductSlider from "@/components/ProductSlider"
-import Image from "next/image"
-import ProductForm from "@/components/AddProduct"
 import AddProduct from "@/components/AddProduct"
+import URL from "@/Url"
 
 // 'http://localhost:4200/slider ?id=34'
-const URL = 'http://localhost:4200'
 
 const getSliderItem = async () =>{
-  const response = await fetch(`${URL}/slider`, {
+  // const response = await fetch(`${URL}/expiredproducts?id=34`, {
+    const response = await fetch(`http://localhost:4200/expiredproducts`, {
     method: "GET",
     headers:{
       "Content-Type": "application/json",
@@ -21,13 +20,13 @@ const getSliderItem = async () =>{
   })
 
   if(!response.ok){
-    throw new Error("Что-то пошло не так")
+    console.log("Что-то пошло не так")
   }
   return response.json()
 }
 
 const getShopList = async () =>{
-  const response = await fetch(`${URL}/shopList`, {
+  const response = await fetch(`http://localhost:4200/shopList`, {
     method: "GET",
     headers:{
       "Content-Type": "application/json",
@@ -42,9 +41,14 @@ const getShopList = async () =>{
 }
 
 const getProducts = async () => {
-  const response = await fetch(`${URL}/products`, {
-    next: {revalidate: 1}
-  })
+  // const response = await fetch(`${URL}/products?id=34`, {
+    const response = await fetch(`http://localhost:4200/products`, {
+    method: "GET",
+    headers:{
+      "Content-Type": "application/json",
+
+    }, next: {revalidate: 1}}
+   )
 
   if(!response.ok){
     throw new Error("Что-то пошло не так")
@@ -54,7 +58,7 @@ const getProducts = async () => {
 }
 
 const getCategories = async ()=>{
-  const response = await fetch(`${URL}/categories`)
+  const response = await fetch(`http://localhost:4200/categories`)
 
   if(!response.ok){
     throw new Error("Что-то пошло не так")
@@ -103,8 +107,6 @@ const ProductPage = async () =>{
         <ShopList elements={elements}/>
       </div>
     </div>
-    
-    {/* <ProductForm /> */}
     
     </div>
   )

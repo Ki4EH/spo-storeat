@@ -5,24 +5,33 @@ import { useForm } from 'react-hook-form';
 import styles from "@/styles/ProductForm.module.scss"
 import Image from 'next/image';
 import axios from 'axios';
+import URL from "@/Url"
 
 const ProductForm = () => {
   const [elements, setProducts] = useState<any>([]);
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
-    axios.get('http://localhost:4200/products')
+    // axios.get(`${URL}/products?id=34`)
+    axios.get(`http://localhost:4200/products`)
       .then(response => {
         setProducts(response.data);
       });
   }, []);
 
   const onSubmit = async (data: any) => {
-    axios.post('http://localhost:4200/products', data)
-      .then(response => {
-        setProducts([ ...elements, response.data]);
-      });
-      location.reload();
+   const newdata = {
+      "id": 34,
+      "product" : data
+    };
+    // axios.post(`${URL}/newproduct`, newdata)
+    axios.post(`http://localhost:4200/products`, data)
+    .then(response => {
+      setProducts([ ...elements, response.data]);
+    });
+    console.log(newdata);
+    window.location.reload();
+      // location.reload();
   };
 
   return (
@@ -37,6 +46,7 @@ const ProductForm = () => {
         height={134}
         />
       <input required type="text" placeholder='Название продукта' {...register("name")} />
+      <input placeholder='URL картинки' {...register("img")}/>
       <textarea placeholder='Описание' {...register("desc")}/>
         </div>
         

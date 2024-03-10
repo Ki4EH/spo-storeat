@@ -1,7 +1,10 @@
 import Recipes from "@/components/Recipes"
 import style from './RecipePage.module.scss'
+import URL from "@/Url"
+
 const getRecipes = async () => {
-  const response = await fetch('http://localhost:4200/recipes', {
+  // const response = await fetch(`${URL}/recipes?id=34`, {
+    const response = await fetch(`http:localhost:4200/recipes`, {
     cache: "no-store"
   })
   

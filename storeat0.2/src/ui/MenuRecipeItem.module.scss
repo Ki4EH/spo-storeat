@@ -1,0 +1,53 @@
+.content{
+    display:grid;
+    grid-template-columns: 2fr 5fr 1fr;
+    grid-column-gap: 15px;
+    align-items: center;
+    height: 5%;
+    width: 100%;
+    color:#5D0000;
+}
+
+.food_image{
+    height: 52px;
+    width:75px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid #5D0000;
+    border-radius: 5px;
+}
+
+.food_info p{
+    margin: 5px auto;
+}
+
+.weight{
+    font-size: 12px;
+}
+
+
+.remove {
+    justify-self: end;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+.remove img{
+    margin: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.remove:hover{
+background-color: #FFE3CE;
+}
+
+
+

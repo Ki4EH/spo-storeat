@@ -1,5 +1,6 @@
 .fullProduct{
     margin-top: 22px;
+    width: 100%;
     >h2{
         font-size: 25px;
         text-align: center;
@@ -33,6 +34,22 @@
         text-align: justify;
         margin-left: 18px;
         margin-right: 18px;
+    }
+
+    >button{
+        background-color: #5D0000;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #FFF4EE;
+        width: 200px;
+        height: 26px;
+        margin: 10px 20px;
+        border: 1px solid #5D0000;
+        &:hover{
+            background-color: #fcdac8;
+            color:#5D0000;
+        }
+        
     }
 }
 

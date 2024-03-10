@@ -1,11 +1,12 @@
 import React from 'react'
 import style from "./ProductPage.module.scss"
 import Image from 'next/image'
-
-const URL = 'http://localhost:4200'
+import DeleteProduct from '@/components/DeleteProduct'
+import URL from "@/Url"
 
 const getData = async (id:any) =>{
-    const response = await fetch(`${URL}/products/${id}`, {
+    // const response = await fetch(`${URL}/productsingle?id=34&productId=${id}`, {
+      const response = await fetch(`http:localhost:4200/products/${id}`, {
       method: "GET",
       headers:{
         "Content-Type": "application/json",
@@ -17,11 +18,10 @@ const getData = async (id:any) =>{
     }
     return response.json()
 }
-
 const ProductPage = async ({params}: any) => {
     const {id} =params;
     const product = await getData(id);
-
+    const productId = product.id
   return (
     <div className={style.fullProduct}>
         <h2>{product.name}</h2>  
@@ -44,7 +44,8 @@ const ProductPage = async ({params}: any) => {
         </div>
         </div>
         <h3>Описание</h3>
-        <p>{product.desc}</p>      
+        <p>{product.desc}</p>
+        <DeleteProduct id = {productId}/>     
       </div>
   )
 }

@@ -1,0 +1,18 @@
+.div{
+    width:100%;
+    >button{
+        margin:auto;
+        margin-top: 18px;
+        margin-left: 18px;
+        text-align: center;
+        width: 400px;
+        height: 35px;
+        background-color: #360101b4;
+        border-radius: 5px;
+        color: #fcdac8;
+        &:hover{
+            background-color: #fcdac8;
+            color:#5D0000;
+        }
+    }
+}

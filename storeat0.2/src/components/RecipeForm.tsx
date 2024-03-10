@@ -4,7 +4,7 @@ import { useForm, SubmitHandler, useFieldArray, Controller } from 'react-hook-fo
 import styles from "@/styles/RecipeForm.module.scss"
 import Image from 'next/image';
 import axios from 'axios';
-
+import URL from "@/Url"
 type Recipe = {
   title: string;
   img?: string;
@@ -21,19 +21,24 @@ const [elements, setProducts] = useState<any>([]);
 
 
   useEffect(() => {
-    axios.get('http://localhost:4200/recipes')
+    // axios.get(`${URL}/recipes?id=34`)
+    axios.get(`http:localhost:4200/recipes`)
       .then(response => {
         setProducts(response.data);
       });
   }, []);
  
   const onSubmit: SubmitHandler<Recipe> = (data) => {
-    
-    axios.post('http://localhost:4200/recipes', data)
+    // const newdata = {
+    //   "id": 34,
+    //   "recipe" : data
+    // };
+    // axios.post(`${URL}/newrecipe`, newdata)
+    axios.post(`http://localhost:4200/recipes`, data)
       .then(response => {
         setProducts([ ...elements, response.data]);
       });
-
+      // console.log(newdata);
       window.location.reload();
   };
 

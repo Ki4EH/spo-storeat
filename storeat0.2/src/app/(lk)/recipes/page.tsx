@@ -5,7 +5,7 @@ import URL from "@/Url"
 const getRecipes = async () => {
   // const response = await fetch(`${URL}/recipes?id=34`, {
     const response = await fetch(`http:localhost:4200/recipes`, {
-    // cache: "no-store"
+    cache: "no-store"
   })
   
   if(!response.ok){

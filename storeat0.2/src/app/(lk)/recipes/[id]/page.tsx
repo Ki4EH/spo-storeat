@@ -3,7 +3,7 @@ import style from "./RecipePage.module.scss"
 import Image from "next/image"
 import DeleteRecipe from "@/components/DeleteRecipe";
 import URL from "@/Url"
-import type { IIngredient } from "@/interfaces/recipe.interface";
+
 const getData = async (id:any) =>{
     // const response = await fetch(`${URL}/recipesingle?id=34&recipeId=${id}`, {
       const response = await fetch(`http://localhost:4200/recipes/${id}`, {
@@ -35,16 +35,16 @@ const RecipePage = async ({params}:any) => {
         <div className={style.ingredients}>
             <div className={style.mini_title}>Ингредиенты</div>
             
-            <p>{recipe.ingredients.map((el:any) =>(
+            {recipe.ingredients.map((el:any) =>(
                 <p key={el.id}>● {el.name} - {el.weight} гр.</p>
-            ))}</p>
+            ))}
         </div>
         <div className={style.nutrition}>
             <p className={style.mini_title}>КБЖУ (на 100 гр)</p>
             <p>● Эн. ценность - {recipe.calories} ккал.</p>
-            <p>● Белки - {recipe.proteins != null ? recipe.proteins : '?'} гр.</p>
-            <p>● Жиры - {recipe.fats != null ? recipe.fats : '?'} гр.</p>
-            <p>● Углеводы - {recipe.carbohydrates != null ? recipe.carbohydrates : '?'} гр.</p>
+            <p>● Белки - {recipe.proteins != '' ? recipe.proteins : '?'} гр.</p>
+            <p>● Жиры - {recipe.fats != '' ? recipe.fats : '?'} гр.</p>
+            <p>● Углеводы - {recipe.carbohydrates != '' ? recipe.carbohydrates : '?'} гр.</p>
         </div>
         </div>
 

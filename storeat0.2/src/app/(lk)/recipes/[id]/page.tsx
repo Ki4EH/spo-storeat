@@ -35,7 +35,7 @@ const RecipePage = async ({params}:any) => {
         <div className={style.ingredients}>
             <div className={style.mini_title}>Ингредиенты</div>
             
-            {recipe.ingredients.map((el:any) =>(
+            {recipe.ingredients != undefined && recipe.ingredients.map((el:any) =>(
                 <p key={el.id}>● {el.name} - {el.weight} гр.</p>
             ))}
         </div>
@@ -50,7 +50,7 @@ const RecipePage = async ({params}:any) => {
 
             <p className={style.mini_title}>Описание</p>
             <div className={style.container}>
-            {recipe.desc.map((el:any)=>(
+            {recipe.desc != undefined && recipe.desc.map((el:any)=>(
                 <p className={style.desc} key={el.id}>{el.id}. {el.description}</p>
             ))}
             </div>

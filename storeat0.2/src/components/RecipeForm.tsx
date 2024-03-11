@@ -17,6 +17,12 @@ const RecipeForm = () => {
   }, []);
  
   const onSubmit: SubmitHandler<IRecipe> = (data) => {
+    if(data.ingredients === undefined){
+      data.ingredients = []
+    }
+    if(data.desc === undefined){
+      data.desc = []
+    }
     // const newdata = {
     //   "id": 34,
     //   "recipe" : data
@@ -40,11 +46,11 @@ const RecipeForm = () => {
   const [steps, setSteps] = useState<IDescription[]>([]);
 
   const addIngredient = () => {
-    setIngredients(prevIngredients => [...prevIngredients, { id: ingredients.length + 1, name: '', weight: 0 }]);
+    setIngredients(prevIngredients => [...prevIngredients, { id: ingredients.length, name: '', weight: 0 }]);
 };
 
 const addStep = () => {
-    setSteps(prevDescriptions => [...prevDescriptions, { id: steps.length + 1, description: '' }]);
+    setSteps(prevDescriptions => [...prevDescriptions, { id: steps.length, description: '' }]);
 };
   return (
     <div className={styles.window}>
@@ -74,21 +80,23 @@ const addStep = () => {
       </div>
 
       <h2>Ингредиенты:</h2>
-      <input type="text" {...register(`ingredients.${0}.name`)} />
-      <input type="number" {...register(`ingredients.${0}.weight`)} />
       {ingredients.map((ingredient, index) => (
-                <div key={index}>
-                    <input type="text" {...register(`ingredients.${index}.name`)} />
-                    <input type="number" {...register(`ingredients.${index}.weight`)} />
-                </div>
+        <div className={styles.ingredients} key={index}>
+          <input type="hidden" {...register(`ingredients.${index}.id`)} defaultValue={index+1}/>
+          <input type="text" {...register(`ingredients.${index}.name`)} placeholder='Название игредиента' />
+          <input type="number" {...register(`ingredients.${index}.weight`)} placeholder='0гр.' defaultValue={0}/>
+        </div>
       ))}
+      
+      
       <button type="button" onClick={addIngredient}>Добавить ингредиент</button>
       <h2>Шаги:</h2>
-      <input type="text" {...register(`desc.${0}.description`)} />
       {steps.map((description, index) => (
-                <div key={index}>
-                    <input type="text" {...register(`desc.${index}.description`)} />
-                </div>
+        
+        <div className={styles.steps} key={index}>
+          <input type="number" {...register(`desc.${index}.id`)} defaultValue={index+1} readOnly placeholder={`${index + 1}`}/>
+          <textarea {...register(`desc.${index}.description`)} placeholder={`Введите шаг№${index + 1}...`}/>
+        </div>
       ))}
 
             

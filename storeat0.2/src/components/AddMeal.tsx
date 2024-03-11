@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from 'react';
 import Image from 'next/image';
-import RecipeForm from "./RecipeForm";
+import MealForm from './MealForm';
 import styles from '@/styles/DeleteButton.module.scss'
 
-const AddRecipe = () => {
+const AddMeal = () => {
   const [showOverlay, setShowOverlay] = useState(false);
 
   const handleClick = () => {
@@ -13,15 +13,14 @@ const AddRecipe = () => {
 
   return (
     <>
-        <Image 
-          src='/plus.svg'
-          width={52}
-          height={49}
-          alt=""
-          onClick={handleClick}
-        />
-      
-      {showOverlay && <RecipeForm />}
+      <Image 
+        src='/add.svg'
+        width={15}
+        height={15}
+        alt="" 
+        onClick={handleClick}
+      />
+      {showOverlay && <MealForm />}
       {showOverlay && <div className={styles.CrossStyle}><Image 
         src='/close.svg'
         width={27}
@@ -33,4 +32,4 @@ const AddRecipe = () => {
   );
 };
 
-export default AddRecipe;
+export default AddMeal;

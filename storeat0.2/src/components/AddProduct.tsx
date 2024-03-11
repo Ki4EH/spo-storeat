@@ -2,13 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import ProductForm from './ProductForm';
-
-const CrossStyle={
-  position: 'absolute',
-  right: '10px',
-  top: '0',
-  zIndex: '100'
-}
+import styles from '@/styles/DeleteButton.module.scss'
 
 const AddProduct = () => {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -27,7 +21,7 @@ const AddProduct = () => {
         onClick={handleClick}
       />
       {showOverlay && <ProductForm />}
-      {showOverlay && <div style={CrossStyle}><Image 
+      {showOverlay && <div className={styles.CrossStyle}><Image 
         src='/close.svg'
         width={27}
         height={25}

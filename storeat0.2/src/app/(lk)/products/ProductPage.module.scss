@@ -13,7 +13,7 @@
 
 .container_slider{
     width: 95%;
-    height: 170px;
+    height: 202px;
     text-align: center;
     margin-left: 3%;
     justify-content: center;
@@ -64,8 +64,9 @@
 }
 
 .container{
-    max-height: 735px;
-
+    max-height: 624px;
+    min-height: 504px;
+    
     >.window{
         height: 100%;
         overflow: auto;
@@ -96,12 +97,13 @@
 
 .product_wrapper{
     margin-top: 18px;
+    margin-left: 18px;
     display: grid;
     grid-template-columns: repeat(auto-fill, 140px);
     grid-template-rows: repeat(auto-fill, 168px);  
     grid-column-gap: 10px;
     grid-row-gap: 10px;
-    justify-content: center;
+    // justify-content: center;
 }
 
 .category{

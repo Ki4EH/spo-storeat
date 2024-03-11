@@ -17,7 +17,7 @@ export default function Profile() {
                 </div>
             </div>
             <div className={styles.login_sidebar}>
-                hairynigga228
+                user_login
             </div>
         </div>
   )

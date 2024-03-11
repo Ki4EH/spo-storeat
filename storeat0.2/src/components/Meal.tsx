@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import MenuProductItem from "@/ui/MenuProductItem";
 import MenuRecipeItem from "@/ui/MenuRecipeItem";
 import styles from "@/styles/Meal.module.scss"
-
+import AddMeal from "./AddMeal";
 function Meal(meal: any): JSX.Element {
   const [isActive, setIsActive] = useState<boolean>(false);
   // const [modalActive, setModalActive] = useState<boolean>(false)
@@ -23,7 +23,7 @@ function Meal(meal: any): JSX.Element {
         <div className={styles.buttons}>
           <div className={styles.add}>
             <button className={styles.add_button}>
-              <img src="/add.svg"></img>
+              <AddMeal />
             </button>
           </div>
           <button className={styles.dropdown_button} onClick={handleClick}>
@@ -45,22 +45,22 @@ function Meal(meal: any): JSX.Element {
   );
 }
 
-function GetList(elems: any) {
+function GetList(elem: any) {
   let res = new Array<JSX.Element>
-  if (elems.products.length === 0) {
-    if (elems.recipes.length === 0) {
+  if (elem.products.length === 0) {
+    if (elem.recipes.length === 0) {
       return <li className="empty">Пока что здесь пусто :(</li>
     }
   }
 
-  if (elems.products != null) {
-    elems.products.map(
+  if (elem.products != null) {
+    elem.products.map(
       (el: any) => (res.push(<li><MenuProductItem key={el.productId} product={el} /></li>))
     )
   }
 
-  if (elems.recipes != null) {
-    elems.recipes.map(
+  if (elem.recipes != null) {
+    elem.recipes.map(
       (el: any) => (res.push(<li><MenuRecipeItem key={el.recipeId} recipe={el} /></li>))
     )
   }

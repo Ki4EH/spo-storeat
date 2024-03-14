@@ -4,6 +4,22 @@ function formatDate(date){
     return `${Math.floor(date / 10)}${date % 10}`
 }
 
+function insertProduct(db, entry, userId, res){
+    db.collection('users').findOne({id: userId}).then((result, err) => {
+        if (err){
+            res.send({"error": "An error has occured."});
+            console.log(err);
+        }
+        const productId = result.products[result.products.length - 1].id + 1;
+        entry.id = productId;
+        let error;
+        db.collection('users').updateOne({id: userId}, {$push: {products: entry}}).then((result, err) => {
+            error = err;
+        });
+        return error;
+    });
+}
+
 
 module.exports = function(app, db) {
     app.post('/user/newproduct', (req, res) => { // добавление продукта пользователя
@@ -15,21 +31,11 @@ module.exports = function(app, db) {
         } catch {
             res.send({"Error": "Incorrect request."});
         }
-        db.collection('users').findOne({id: userId}).then((result, err) => {
-            if (err){
-                res.send({"error": "An error has occured."});
-                console.log(err);
-            }
-            const productId = result.products[result.products.length - 1].id + 1;
-            entry.id = productId;
-            db.collection('users').updateOne({id: userId}, {$push: {products: entry}}).then((result, err) => {
-                if (err) {
-                    res.send({"error": "An error has occured."});
-                    console.log(err)
-                }
-                else res.send("Done."); 
-            });
-        });
+        let err = insertProduct(db, entry, userId, res);
+        if (err){
+            res.send({"error": "An error has occured."});
+            console.log(err);
+        } else res.send("Done.")
         // console.log(req.body);
     });
 
@@ -49,7 +55,13 @@ module.exports = function(app, db) {
                 console.log(err);
             }
             const recipeId = result.recipes[result.recipes.length - 1].id + 1;
+            const userProducts = result.products.map(item => item.name);
             entry.id = recipeId;
+            entry.ingredients.forEach(element => {
+                if (!userProducts.includes(element.name)){
+                    insertProduct(db, element, userId, res);
+                }
+            });
             db.collection('users').updateOne({id: userId}, {$push: {recipes: entry}}).then((result, err) => {
                 if (err){
                     res.send({"error": "An error has occured."});

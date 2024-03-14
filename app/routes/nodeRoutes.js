@@ -24,8 +24,11 @@ module.exports = function(app, db) {
                     console.log(err)
                 }
                 else res.send("Done."); 
+            });
+            if (err){
+                res.send({"error": "An error has occured."});
+                console.log(err);
             }
-            )
         });
         // console.log(req.body);
     });
@@ -40,16 +43,21 @@ module.exports = function(app, db) {
             res.send({"Error": "Incorrect request."});
         }
         // console.log(req.body);
-        db.collection('users').updateOne({id: userId}, {$push: {recipes: entry}}).then((result, err) => {
+        db.collection('users').findOne({id: userId}, {}).then((result, err) => {
             const recipeId = result.recipes[result.recipes.length - 1].id + 1;
             entry.id = recipeId;
+            db.collection('users').updateOne({id: userId}, {$push: {recipes: entry}}).then((result, err) => {
+                if (err){
+                    res.send({"error": "An error has occured."});
+                    console.log(err);
+                }
+                else res.send("Done."); 
+            });
             if (err){
                 res.send({"error": "An error has occured."});
                 console.log(err);
-            } 
-            else res.send("Done."); 
-        }
-        )
+            }
+        });
     });
 
     app.post('/user/openproduct', (req, res) => { // задание даты открытия

@@ -301,7 +301,26 @@ module.exports = function(app, db) {
             }
             else res.send(item.days);
         });
-        updateShoplist(db, userId);
+    });
+
+    app.get("/user/shoplist", (req, res) => { // получение рецепта пользователя
+        let userId = 0;
+        try {
+            userId = parseInt(req.query.id);
+        } catch {
+            res.send({"Error": "Incorrect request."})
+        }
+        db.collection("users").findOne({id: userId}, {}).then((item, err) => {
+            // console.log(userId);
+            if (err) {
+                console.log(err);
+                res.send({"error": "server error has occured"});
+            } 
+            else if (!item) {
+                res.send({"Error": "Could not find user with ID " + userId + "."})
+            }
+            else res.send(item.shoplist);
+        });
     });
 
     app.delete("/user/deleterecipe", (req, res) => {

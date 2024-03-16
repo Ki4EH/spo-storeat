@@ -21,6 +21,54 @@ function insertProduct(db, entry, userId, res){
 }
 
 
+function updateShoplist(db, userId){
+    db.collection("users").findOne({id: userId}, {}).then((item, err) => {
+        // console.log(userId);
+        if (err) {
+            console.log(err);
+            return err;
+        }
+        shoplistRaw = [];
+        item.days.forEach(element => {
+            element.meals.forEach(meal => {
+                meal.recipes.forEach(recipe => {
+                    try {
+                        let targetRecipe = item.recipes.find(r => r.id == recipe.recipeId);
+                        // console.log(targetRecipe);
+                        targetRecipe.ingredients.forEach(r => {
+                            // console.log(r);
+                            let targetIndex = shoplistRaw.findIndex(e => e.productId == r.id);
+                            if (targetIndex == -1) shoplistRaw.push({"productId" : r.id, "name": r.name, "weight": r.weight});
+                            else shoplistRaw[targetIndex].weight += r.weight;
+                        });
+                    } catch (Error){
+                        console.log(Error);
+                        return Error;
+                    }
+                })
+                meal.products.forEach(product => {
+                    let targetIndex = shoplistRaw.findIndex(e => e.productId == product.productId);
+                    if (targetIndex == -1) shoplistRaw.push({"productId" : product.id, "name": product.name, "weight": product.weight});
+                    else shoplistRaw[targetIndex].weight += product.weight;
+                })
+            })
+        })
+        let shoplist = [];
+        shoplistRaw.forEach(product => {
+            let shortage = product.weight - item.products.find(p => p.id == product.productId).weight;
+            if (shortage > 0) shoplist.push({"productId": product.productId, "name": product.name, "weight": shortage});
+        })
+        console.log(shoplist);
+        db.collection('users').updateOne({id: userId}, {$set: {shoplist : shoplist}}).then((res, err) => {
+            if (err) {
+                console.log(err);
+                return err;
+            }
+        })
+    });
+}
+
+
 module.exports = function(app, db) {
     app.post('/user/newproduct', (req, res) => { // добавление продукта пользователя
         let entry;
@@ -93,8 +141,7 @@ module.exports = function(app, db) {
                 console.log(err)
             }
             else res.send("Done."); 
-        }
-        )
+        })
     });
 
     app.get("/user/products", (req, res) => { // получение продукта пользователя
@@ -234,6 +281,27 @@ module.exports = function(app, db) {
             });
             res.send(expiredproducts); 
         });
+    });
+
+    app.get("/user/meals", (req, res) => { // получение рецепта пользователя
+        let userId = 0;
+        try {
+            userId = parseInt(req.query.id);
+        } catch {
+            res.send({"Error": "Incorrect request."})
+        }
+        db.collection("users").findOne({id: userId}, {}).then((item, err) => {
+            // console.log(userId);
+            if (err) {
+                console.log(err);
+                res.send({"error": "server error has occured"});
+            } 
+            else if (!item) {
+                res.send({"Error": "Could not find user with ID " + userId + "."})
+            }
+            else res.send(item.days);
+        });
+        updateShoplist(db, userId);
     });
 
     app.delete("/user/deleterecipe", (req, res) => {
